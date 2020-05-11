@@ -167,8 +167,15 @@ function doRectanglesOverlap(/* rect1, rect2 */) {
  *   { center: { x:0, y:0 }, radius:10 },  { x:10, y:10 }   => false
  *
  */
-function isInsideCircle(/* circle, point */) {
-  throw new Error('Not implemented');
+function isInsideCircle(circle, point) {
+  const distPointsX = (point.x - circle.center.x) * (point.x - circle.center.x);
+  const distPointsY = (point.y - circle.center.y) * (point.y - circle.center.y);
+  const distPoints = distPointsX + distPointsY;
+  const r = circle.radius * circle.radius;
+  if (distPoints < r) {
+    return true;
+  }
+  return false;
 }
 
 
@@ -183,8 +190,26 @@ function isInsideCircle(/* circle, point */) {
  *   'abracadabra'  => 'c'
  *   'entente' => null
  */
-function findFirstSingleChar(/* str */) {
-  throw new Error('Not implemented');
+function findFirstSingleChar(str) {
+  const strArray = str.split('');
+  let result = '';
+  let ctr = 0;
+
+  for (let x = 0; x < strArray.length; x += 1) {
+    ctr = 0;
+
+    for (let y = 0; y < strArray.length; y += 1) {
+      if (strArray[x] === strArray[y]) {
+        ctr += 1;
+      }
+    }
+    if (ctr < 2) {
+      result = strArray[x];
+      break;
+    }
+  }
+  if (result.length === 0) { return null; }
+  return result;
 }
 
 
@@ -227,8 +252,8 @@ function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
  * 'rotator' => 'rotator'
  * 'noon' => 'noon'
  */
-function reverseString(/* str */) {
-  throw new Error('Not implemented');
+function reverseString(str) {
+  return str.split('').reverse().join('');
 }
 
 
@@ -244,8 +269,9 @@ function reverseString(/* str */) {
  *   87354 => 45378
  *   34143 => 34143
  */
-function reverseInteger(/* num */) {
-  throw new Error('Not implemented');
+function reverseInteger(num) {
+  const numStr = String(num);
+  return numStr.split('').reverse().join('');
 }
 
 
@@ -287,8 +313,9 @@ function isCreditCardNumber(/* ccn */) {
  *   10000 ( 1+0+0+0+0 = 1 ) => 1
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
-function getDigitalRoot(/* num */) {
-  throw new Error('Not implemented');
+function getDigitalRoot(num) {
+  const withoutOne = (num - 1) % 9;
+  return withoutOne + 1;
 }
 
 
@@ -313,10 +340,10 @@ function getDigitalRoot(/* num */) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
+
 function isBracketsBalanced(/* str */) {
   throw new Error('Not implemented');
 }
-
 
 /**
  * Returns the string with n-ary (binary, ternary, etc, where n <= 10)
@@ -338,8 +365,8 @@ function isBracketsBalanced(/* str */) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  return num.toString(n);
 }
 
 
@@ -378,8 +405,19 @@ function getCommonDirectoryPath(/* pathes */) {
  *                         [ 6 ]]
  *
  */
-function getMatrixProduct(/* m1, m2 */) {
-  throw new Error('Not implemented');
+function getMatrixProduct(m1, m2) {
+  const result = [];
+  for (let i = 0; i < m1.length; i += 1) {
+    result[i] = [];
+    for (let j = 0; j < m2[0].length; j += 1) {
+      let sum = 0;
+      for (let k = 0; k < m1[0].length; k += 1) {
+        sum += m1[i][k] * m2[k][j];
+      }
+      result[i][j] = sum;
+    }
+  }
+  return result;
 }
 
 
