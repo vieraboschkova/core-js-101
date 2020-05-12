@@ -55,7 +55,8 @@ function getRegexForGuid() {
  *
  */
 function getRegexForPitSpot() {
-  throw new Error('Not implemented');
+  const ptRegx = /p.t/;
+  return ptRegx;
 }
 
 
@@ -80,8 +81,7 @@ function getRegexForPitSpot() {
  *   'Pa55'.match(validator) => false
  */
 function getPasswordValidator(minLength) {
-  const regex = new RegExp(`^(?=.*[a-z])(?=.*[A-Z])(?=.*)[a-zA-Z]{${minLength}, }$`);
-  return regex;
+  return new RegExp(`^(?=.*[a-z])(?=.*[A-Z])(?=.*)([a-zA-Z0-9]{${minLength},})$`);
 }
 
 

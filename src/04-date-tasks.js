@@ -34,8 +34,9 @@ function parseDataFromRfc2822(/* value */) {
  *    '2016-01-19T16:07:37+00:00'    => Date()
  *    '2016-01-19T08:07:37Z' => Date()
  */
-function parseDataFromIso8601(/* value */) {
-  throw new Error('Not implemented');
+function parseDataFromIso8601(value) {
+  const dt = value.split(/[: T-]/).map(parseFloat);
+  return new Date(dt[0], dt[1] - 1, dt[2], dt[3] + 1 || 0, dt[4] || 0, dt[5] || 0, 0);
 }
 
 
