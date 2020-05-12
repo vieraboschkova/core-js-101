@@ -16,11 +16,18 @@
  *
  * @example:
  *    'December 17, 1995 03:24:00'    => Date()
+ *    'December 25, 1995 23:15:30'
  *    'Tue, 26 Jan 2016 13:48:02 GMT' => Date()
  *    'Sun, 17 May 1998 03:00:00 GMT+01' => Date()
  */
-function parseDataFromRfc2822(/* value */) {
-  throw new Error('Not implemented');
+function parseDataFromRfc2822(value) {
+  const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  const firstThreeLetters = value.slice(0, 3);
+  const dateString = value;
+  if (days.includes(firstThreeLetters)) {
+    dateString.slice(4);
+  }
+  return new Date(dateString);
 }
 
 /**
@@ -102,8 +109,19 @@ function timeSpanToString(startDate, endDate) {
  *    Date.UTC(2016,3,5,18, 0) => Math.PI
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
-function angleBetweenClockHands(/* date */) {
-  throw new Error('Not implemented');
+function angleBetweenClockHands(date) {
+  let hours = date.getUTCHours();
+  const minutes = date.getUTCMinutes();
+  if (hours > 11) {
+    hours -= 12;
+  }
+  const angleMinutes = 6 * minutes;
+  const angleHours = 30 * (hours + minutes / 60);
+  let angle = Math.abs(angleMinutes - angleHours);
+  if (angle > 180) {
+    angle -= 180;
+  }
+  return (angle * Math.PI) / 180;
 }
 
 
